@@ -21,9 +21,10 @@
 		30223F7D2BCD6D1500AB156D /* PlayerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F7C2BCD6D1500AB156D /* PlayerDetailView.swift */; };
 		30223F7F2BCD6D2900AB156D /* PlayerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F7E2BCD6D2900AB156D /* PlayerDetailViewModel.swift */; };
 		30223F812BCD6D3000AB156D /* PlayerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F802BCD6D3000AB156D /* PlayerDetail.swift */; };
-		30223F832BCD6D3900AB156D /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F822BCD6D3900AB156D /* Club.swift */; };
+		30223F832BCD6D3900AB156D /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F822BCD6D3900AB156D /* Team.swift */; };
 		30223F852BCD6D4300AB156D /* ClubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F842BCD6D4300AB156D /* ClubViewModel.swift */; };
 		30223F872BCD6D5700AB156D /* ClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F862BCD6D5700AB156D /* ClubView.swift */; };
+		30223F8C2BCD99A800AB156D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F8B2BCD99A800AB156D /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,9 +44,10 @@
 		30223F7C2BCD6D1500AB156D /* PlayerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailView.swift; sourceTree = "<group>"; };
 		30223F7E2BCD6D2900AB156D /* PlayerDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewModel.swift; sourceTree = "<group>"; };
 		30223F802BCD6D3000AB156D /* PlayerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetail.swift; sourceTree = "<group>"; };
-		30223F822BCD6D3900AB156D /* Club.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Club.swift; sourceTree = "<group>"; };
+		30223F822BCD6D3900AB156D /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		30223F842BCD6D4300AB156D /* ClubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubViewModel.swift; sourceTree = "<group>"; };
 		30223F862BCD6D5700AB156D /* ClubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubView.swift; sourceTree = "<group>"; };
+		30223F8B2BCD99A800AB156D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				30223F882BCD6EE800AB156D /* PlayerList */,
 				30223F892BCD894200AB156D /* PlayerDetail */,
 				30223F8A2BCD894E00AB156D /* Club */,
+				30223F8B2BCD99A800AB156D /* NetworkManager.swift */,
 			);
 			path = NBAPal;
 			sourceTree = "<group>";
@@ -125,7 +128,7 @@
 		30223F8A2BCD894E00AB156D /* Club */ = {
 			isa = PBXGroup;
 			children = (
-				30223F822BCD6D3900AB156D /* Club.swift */,
+				30223F822BCD6D3900AB156D /* Team.swift */,
 				30223F842BCD6D4300AB156D /* ClubViewModel.swift */,
 				30223F862BCD6D5700AB156D /* ClubView.swift */,
 			);
@@ -206,6 +209,7 @@
 				30223F602BCD66A600AB156D /* ViewController.swift in Sources */,
 				30223F852BCD6D4300AB156D /* ClubViewModel.swift in Sources */,
 				30223F7F2BCD6D2900AB156D /* PlayerDetailViewModel.swift in Sources */,
+				30223F8C2BCD99A800AB156D /* NetworkManager.swift in Sources */,
 				30223F722BCD67B500AB156D /* Coordinator.swift in Sources */,
 				30223F5C2BCD66A600AB156D /* AppDelegate.swift in Sources */,
 				30223F872BCD6D5700AB156D /* ClubView.swift in Sources */,
@@ -215,7 +219,7 @@
 				30223F7D2BCD6D1500AB156D /* PlayerDetailView.swift in Sources */,
 				30223F752BCD6A3800AB156D /* PlayersCoordinator.swift in Sources */,
 				30223F7B2BCD6D0800AB156D /* Player.swift in Sources */,
-				30223F832BCD6D3900AB156D /* Club.swift in Sources */,
+				30223F832BCD6D3900AB156D /* Team.swift in Sources */,
 				30223F772BCD6B2A00AB156D /* PlayersListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

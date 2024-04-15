@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct Player: Identifiable {
-    let id: Int
-    let name: String
-    let clubID: Int
+struct Player: Identifiable, Codable {
+    let id: Int?
+        let firstName, lastName, position, height: String?
+        let weight, jerseyNumber, college, country: String?
+        let draftYear, draftRound, draftNumber: Int?
+        let team: Team?
 }

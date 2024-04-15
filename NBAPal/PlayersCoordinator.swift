@@ -51,7 +51,7 @@ class PlayersCoordinator: Coordinator {
 // MARK: Navigation Related Extensions
 extension PlayersCoordinator {
     private func showPlayerDetail(for player: Player) {
-        let viewModel = PlayerDetailViewModel(playerID: player.id)
+        let viewModel = PlayerDetailViewModel(playerID: player.id ?? 0)
         let playerDetailView = PlayerDetailView(viewModel: viewModel)
         bind(view: playerDetailView)
         rootViewController.pushViewController(UIHostingController(rootView: playerDetailView), animated: true)

@@ -15,18 +15,31 @@ struct PlayersView: View {
     
     var body: some View {
         NavigationView {
-                    List(viewModel.players) { player in
-                        Button(action: {
-                            didClickPlayer.send(player)
-                        }) {
-                            Text(player.name)
-                        }
-                    }
-                    .navigationBarTitle("Players")
-                    .onAppear {
-                        viewModel.fetchPlayers()
-                    }
+            List {
+                ForEach (viewModel.players, id: \.id) { player in
+                    PlayerRow(player: player)
                 }
+            }
+            .navigationBarTitle("Players")
+            .onAppear {
+                viewModel.fetchPlayers()
+            }
+        }
+    }
+}
+
+struct PlayerRow: View {
+    let player: Player
+    var body: some View {
+        HStack (spacing: 12) {
+            Image(systemName: "person.fill")
+                .resizable()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
+            Text(player.firstName ?? "")
+        }
+        .padding(4)
+        
     }
 }
 

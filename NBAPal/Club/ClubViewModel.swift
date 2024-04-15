@@ -9,7 +9,7 @@ import Foundation
 
 final class ClubViewModel: ObservableObject {
     
-    @Published var club: Club?
+    @Published var club: Team?
     
     private var clubID: Int
     
@@ -18,6 +18,8 @@ final class ClubViewModel: ObservableObject {
     }
     
     func fetchClubDetails() {
-        self.club = Club(id: 0, name: "Generic club")
+//        self.club = Team(id: 0, name: "Generic club")
+        
+        
     }
 }
