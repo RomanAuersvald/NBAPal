@@ -10,9 +10,20 @@
 		30223F5C2BCD66A600AB156D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F5B2BCD66A600AB156D /* AppDelegate.swift */; };
 		30223F5E2BCD66A600AB156D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F5D2BCD66A600AB156D /* SceneDelegate.swift */; };
 		30223F602BCD66A600AB156D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F5F2BCD66A600AB156D /* ViewController.swift */; };
-		30223F632BCD66A600AB156D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 30223F622BCD66A600AB156D /* Base */; };
 		30223F652BCD66A800AB156D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30223F642BCD66A800AB156D /* Assets.xcassets */; };
 		30223F682BCD66A800AB156D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 30223F672BCD66A800AB156D /* Base */; };
+		30223F702BCD678A00AB156D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F6F2BCD678A00AB156D /* AppCoordinator.swift */; };
+		30223F722BCD67B500AB156D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F712BCD67B500AB156D /* Coordinator.swift */; };
+		30223F752BCD6A3800AB156D /* PlayersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F742BCD6A3800AB156D /* PlayersCoordinator.swift */; };
+		30223F772BCD6B2A00AB156D /* PlayersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F762BCD6B2A00AB156D /* PlayersListView.swift */; };
+		30223F792BCD6D0100AB156D /* PlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F782BCD6D0100AB156D /* PlayersViewModel.swift */; };
+		30223F7B2BCD6D0800AB156D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F7A2BCD6D0800AB156D /* Player.swift */; };
+		30223F7D2BCD6D1500AB156D /* PlayerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F7C2BCD6D1500AB156D /* PlayerDetailView.swift */; };
+		30223F7F2BCD6D2900AB156D /* PlayerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F7E2BCD6D2900AB156D /* PlayerDetailViewModel.swift */; };
+		30223F812BCD6D3000AB156D /* PlayerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F802BCD6D3000AB156D /* PlayerDetail.swift */; };
+		30223F832BCD6D3900AB156D /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F822BCD6D3900AB156D /* Club.swift */; };
+		30223F852BCD6D4300AB156D /* ClubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F842BCD6D4300AB156D /* ClubViewModel.swift */; };
+		30223F872BCD6D5700AB156D /* ClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F862BCD6D5700AB156D /* ClubView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +31,21 @@
 		30223F5B2BCD66A600AB156D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30223F5D2BCD66A600AB156D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		30223F5F2BCD66A600AB156D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		30223F622BCD66A600AB156D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30223F642BCD66A800AB156D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30223F672BCD66A800AB156D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30223F692BCD66A900AB156D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30223F6F2BCD678A00AB156D /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		30223F712BCD67B500AB156D /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		30223F742BCD6A3800AB156D /* PlayersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersCoordinator.swift; sourceTree = "<group>"; };
+		30223F762BCD6B2A00AB156D /* PlayersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersListView.swift; sourceTree = "<group>"; };
+		30223F782BCD6D0100AB156D /* PlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewModel.swift; sourceTree = "<group>"; };
+		30223F7A2BCD6D0800AB156D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		30223F7C2BCD6D1500AB156D /* PlayerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailView.swift; sourceTree = "<group>"; };
+		30223F7E2BCD6D2900AB156D /* PlayerDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewModel.swift; sourceTree = "<group>"; };
+		30223F802BCD6D3000AB156D /* PlayerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetail.swift; sourceTree = "<group>"; };
+		30223F822BCD6D3900AB156D /* Club.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Club.swift; sourceTree = "<group>"; };
+		30223F842BCD6D4300AB156D /* ClubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubViewModel.swift; sourceTree = "<group>"; };
+		30223F862BCD6D5700AB156D /* ClubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +80,56 @@
 			children = (
 				30223F5B2BCD66A600AB156D /* AppDelegate.swift */,
 				30223F5D2BCD66A600AB156D /* SceneDelegate.swift */,
+				30223F6F2BCD678A00AB156D /* AppCoordinator.swift */,
 				30223F5F2BCD66A600AB156D /* ViewController.swift */,
-				30223F612BCD66A600AB156D /* Main.storyboard */,
 				30223F642BCD66A800AB156D /* Assets.xcassets */,
 				30223F662BCD66A800AB156D /* LaunchScreen.storyboard */,
 				30223F692BCD66A900AB156D /* Info.plist */,
+				30223F732BCD685300AB156D /* Protocols */,
+				30223F742BCD6A3800AB156D /* PlayersCoordinator.swift */,
+				30223F882BCD6EE800AB156D /* PlayerList */,
+				30223F892BCD894200AB156D /* PlayerDetail */,
+				30223F8A2BCD894E00AB156D /* Club */,
 			);
 			path = NBAPal;
+			sourceTree = "<group>";
+		};
+		30223F732BCD685300AB156D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				30223F712BCD67B500AB156D /* Coordinator.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		30223F882BCD6EE800AB156D /* PlayerList */ = {
+			isa = PBXGroup;
+			children = (
+				30223F762BCD6B2A00AB156D /* PlayersListView.swift */,
+				30223F782BCD6D0100AB156D /* PlayersViewModel.swift */,
+				30223F7A2BCD6D0800AB156D /* Player.swift */,
+			);
+			path = PlayerList;
+			sourceTree = "<group>";
+		};
+		30223F892BCD894200AB156D /* PlayerDetail */ = {
+			isa = PBXGroup;
+			children = (
+				30223F7C2BCD6D1500AB156D /* PlayerDetailView.swift */,
+				30223F7E2BCD6D2900AB156D /* PlayerDetailViewModel.swift */,
+				30223F802BCD6D3000AB156D /* PlayerDetail.swift */,
+			);
+			path = PlayerDetail;
+			sourceTree = "<group>";
+		};
+		30223F8A2BCD894E00AB156D /* Club */ = {
+			isa = PBXGroup;
+			children = (
+				30223F822BCD6D3900AB156D /* Club.swift */,
+				30223F842BCD6D4300AB156D /* ClubViewModel.swift */,
+				30223F862BCD6D5700AB156D /* ClubView.swift */,
+			);
+			path = Club;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +192,6 @@
 			files = (
 				30223F652BCD66A800AB156D /* Assets.xcassets in Resources */,
 				30223F682BCD66A800AB156D /* Base in Resources */,
-				30223F632BCD66A600AB156D /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +202,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30223F702BCD678A00AB156D /* AppCoordinator.swift in Sources */,
 				30223F602BCD66A600AB156D /* ViewController.swift in Sources */,
+				30223F852BCD6D4300AB156D /* ClubViewModel.swift in Sources */,
+				30223F7F2BCD6D2900AB156D /* PlayerDetailViewModel.swift in Sources */,
+				30223F722BCD67B500AB156D /* Coordinator.swift in Sources */,
 				30223F5C2BCD66A600AB156D /* AppDelegate.swift in Sources */,
+				30223F872BCD6D5700AB156D /* ClubView.swift in Sources */,
+				30223F812BCD6D3000AB156D /* PlayerDetail.swift in Sources */,
 				30223F5E2BCD66A600AB156D /* SceneDelegate.swift in Sources */,
+				30223F792BCD6D0100AB156D /* PlayersViewModel.swift in Sources */,
+				30223F7D2BCD6D1500AB156D /* PlayerDetailView.swift in Sources */,
+				30223F752BCD6A3800AB156D /* PlayersCoordinator.swift in Sources */,
+				30223F7B2BCD6D0800AB156D /* Player.swift in Sources */,
+				30223F832BCD6D3900AB156D /* Club.swift in Sources */,
+				30223F772BCD6B2A00AB156D /* PlayersListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		30223F612BCD66A600AB156D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				30223F622BCD66A600AB156D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		30223F662BCD66A800AB156D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -297,7 +365,7 @@
 				INFOPLIST_FILE = NBAPal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -325,7 +393,7 @@
 				INFOPLIST_FILE = NBAPal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
