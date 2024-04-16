@@ -11,35 +11,33 @@ import Combine
 struct PlayerDetailView: View {
     
     @StateObject var viewModel: PlayerDetailViewModel
-    let didClickPlayerClubDetail = PassthroughSubject<PlayerDetail, Never>()
+    let didClickPlayerClubDetail = PassthroughSubject<Team, Never>()
     
     var body: some View {
         VStack {
-            Text(viewModel.profile?.name ?? "N/A")
+            Text(viewModel.player.firstName ?? "N/A")
                 .font(.title)
-            if let age = viewModel.profile?.age {
+            Text(viewModel.player.lastName ?? "N/A")
+            if let age = viewModel.player.draftYear {
                 Text("Age: \(String(age))")
             } else {
                 Text("Age: Unknown")
             }
-            if let profile = viewModel.profile {
+            if let team = viewModel.player.team {
                 Button(action: {
-                    didClickPlayerClubDetail.send(profile)
+                    didClickPlayerClubDetail.send(team)
                 }) {
-                    Text("Club info")
+                    Text("Team info")
                 }
             }
             Spacer()
         }
         .padding()
-        .navigationBarTitle(viewModel.profile?.name ?? "")
-        .onAppear {
-            viewModel.fetchProfile()
-        }
+        .navigationBarTitle(viewModel.player.firstName ?? "")
     }
 }
 
 #Preview {
-    PlayerDetailView(viewModel: PlayerDetailViewModel(playerID: 0))
+    PlayerDetailView(viewModel: PlayerDetailViewModel(player: MockData.shared.player))
 }
 

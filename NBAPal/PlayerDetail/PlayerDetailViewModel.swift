@@ -9,17 +9,10 @@ import Foundation
 
 final class PlayerDetailViewModel: ObservableObject {
     
-    @Published var profile: PlayerDetail?
+    var player: Player
     
-    private var playerID: Int
-    
-    init(playerID: Int) {
-        self.playerID = playerID
+    init(player: Player) {
+        self.player = player
     }
     
-    func fetchProfile() {
-        self.profile = PlayerDetail(id: 05,
-                                    name: "Jone Doe",
-                                    age: 25, clubID: 9)
-    }
 }

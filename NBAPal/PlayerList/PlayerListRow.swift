@@ -10,8 +10,7 @@ import SwiftUI
 struct PlayerListRow: View {
     let player: Player
     var body: some View {
-        HStack (spacing: 12) {
-            
+        HStack (spacing: 5) {
             ZStack {
                 Image(systemName: "person.fill")
                     .resizable()
@@ -41,7 +40,10 @@ struct PlayerListRow: View {
             }
             Text(player.position ?? "")
                 .font(.title)
-            
+            Image(systemName: "chevron.right")
+                .imageScale(.small)
+                .tint(.gray)
+                .padding(.init(top: 0, leading: 5, bottom: 0, trailing: -30))
         }
         .padding(4)
         

@@ -12,12 +12,18 @@ struct PlayersView: View {
     
     @StateObject var viewModel: PlayersViewModel
     let didClickPlayer = PassthroughSubject<Player, Never>()
-    
+    @State var isFirstAppear = true
     var body: some View {
         NavigationView {
             List {
                 ForEach (viewModel.players, id: \.id) { player in
-                    PlayerListRow(player: player)
+                    Button(action: {
+                        didClickPlayer.send(player)
+                    }, label: {
+                        PlayerListRow(player: player)
+                    })
+                    .buttonStyle(.plain)
+                    
                 }
                 if !viewModel.players.isEmpty {
                     LoadingView(isLoadingFail: viewModel.requestError != nil, isLoadingFinished: viewModel.isAllLoaded,
@@ -31,7 +37,7 @@ struct PlayersView: View {
                                     Text("Loading next Players failed. Tap to retry.")
                     )
                     .onAppear(perform: {
-//                        loadNextDataBatch()
+                        loadNextDataBatch()
                     })
                     .onTapGesture {
                         loadNextDataBatch()
@@ -39,8 +45,12 @@ struct PlayersView: View {
                 }
             }
             .onAppear(perform: {
-//                  loadNextDataBatch()
+                if isFirstAppear {
+                    loadNextDataBatch()
+                    isFirstAppear = false
+                }
             })
+            .navigationTitle("Players")
             .toolbar{
                 ToolbarItem(placement: .principal) {
                     Image(systemName: "basketball.fill")

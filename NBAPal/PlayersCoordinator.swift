@@ -14,14 +14,16 @@ class PlayersCoordinator: Coordinator {
     var rootViewController: UINavigationController
     private var cancellables = Set<AnyCancellable>()
     
+    let sharedViewModel: PlayersViewModel
+    
     init(){
         rootViewController = UINavigationController()
         rootViewController.navigationBar.prefersLargeTitles = true
+        sharedViewModel = PlayersViewModel(networkManager: NetworkManager.shared)
     }
     
     func start() {
-        let playersViewModel = PlayersViewModel(networkManager: NetworkManager.shared)
-        let view = PlayersView(viewModel: playersViewModel)
+        let view = PlayersView(viewModel: self.sharedViewModel)
         bind(view: view)
         let navigationViewController = UINavigationController(rootViewController: UIHostingController(rootView: view))
         rootViewController = navigationViewController
@@ -40,8 +42,8 @@ class PlayersCoordinator: Coordinator {
     private func bind(view: PlayerDetailView) {
         view.didClickPlayerClubDetail
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] player in
-                self?.showClubView(for: player.id)
+            .sink(receiveValue: { [weak self] team in
+                self?.showTeamView(for: team)
             })
             .store(in: &cancellables)
     }
@@ -51,14 +53,14 @@ class PlayersCoordinator: Coordinator {
 // MARK: Navigation Related Extensions
 extension PlayersCoordinator {
     private func showPlayerDetail(for player: Player) {
-        let viewModel = PlayerDetailViewModel(playerID: player.id ?? 0)
+        let viewModel = PlayerDetailViewModel(player: player)
         let playerDetailView = PlayerDetailView(viewModel: viewModel)
         bind(view: playerDetailView)
         rootViewController.pushViewController(UIHostingController(rootView: playerDetailView), animated: true)
     }
     
-    private func showClubView(for id: Int) {
-        let viewModel = ClubViewModel(clubID: id)
+    private func showTeamView(for team: Team) {
+        let viewModel = TeamViewModel(team: team)
         let clubView = ClubView(viewModel: viewModel)
         rootViewController.pushViewController(UIHostingController(rootView: clubView), animated: true)
     }

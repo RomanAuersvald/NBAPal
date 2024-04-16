@@ -10,22 +10,19 @@ import Combine
 
 struct ClubView: View {
     
-    @StateObject var viewModel: ClubViewModel
+    @StateObject var viewModel: TeamViewModel
     
     var body: some View {
         VStack {
-            Text(viewModel.club?.name ?? "N/A")
+            Text(viewModel.team.fullName ?? "N/A")
                 .font(.title)
             Spacer()
         }
         .padding()
         .navigationBarTitle("Club DETAILS")
-        .onAppear {
-            viewModel.fetchClubDetails()
-        }
     }
 }
 
 #Preview {
-    ClubView(viewModel: ClubViewModel(clubID: 0))
+    ClubView(viewModel: TeamViewModel(team: MockData.shared.team))
 }
