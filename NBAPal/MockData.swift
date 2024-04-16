@@ -14,7 +14,7 @@ public class MockData {
     
     let team = Team(id: 0, conference: "", division: "", city: "", name: "TeamName", fullName: "TeamFullName", abbreviation: "TFN")
     
-    let player = Player(id: 0, firstName: "FirstName", lastName: "LastName", position: "F", height: "", weight: "", jerseyNumber: "", college: "", country: "", draftYear: 0000, draftRound: 0, draftNumber: 0, team: Team(id: 0, conference: "", division: "", city: "", name: "TeamName", fullName: "TeamFullName", abbreviation: "TFN"))
+    let player = Player(id: 0, firstName: "FirstName", lastName: "LastName", position: "F", height: "6'1", weight: "123", jerseyNumber: "49", college: "College", country: "Country", draftYear: 0000, draftRound: 0, draftNumber: 0, team: Team(id: 0, conference: "", division: "", city: "", name: "TeamName", fullName: "TeamFullName", abbreviation: "TFN"))
 }
 
 
