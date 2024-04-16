@@ -57,12 +57,16 @@ final class PlayersViewModel: ObservableObject {
                     }
                     
                 } receiveValue: { receivedDataWrapper in
-                    guard let players = receivedDataWrapper.data else { self.state = .idle; return }
-                    self.players.append(contentsOf: players)
-                    self.cursor += self.perPage
+                    guard let receivedPlayers = receivedDataWrapper.data else { self.state = .idle; return }
+                    self.players.append(contentsOf: receivedPlayers)
+                    if let nextCursor = receivedDataWrapper.meta?.nextCursor {
+                        self.cursor = nextCursor
+                    }else {
+                        self.cursor += self.perPage // failback - should not happen
+                    }
                     self.state = .finished
                     
-                    if players.count < self.perPage {
+                    if receivedPlayers.count < self.perPage {
                         self.isAllLoaded = true
                     }
                 }

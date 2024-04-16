@@ -17,7 +17,7 @@ struct PlayersView: View {
         NavigationView {
             List {
                 ForEach (viewModel.players, id: \.id) { player in
-                    PlayerRow(player: player)
+                    PlayerListRow(player: player)
                 }
                 if !viewModel.players.isEmpty {
                     LoadingView(isLoadingFail: viewModel.requestError != nil, isLoadingFinished: viewModel.isAllLoaded,
@@ -31,7 +31,7 @@ struct PlayersView: View {
                                     Text("Loading next Players failed. Tap to retry.")
                     )
                     .onAppear(perform: {
-                        loadNextDataBatch()
+//                        loadNextDataBatch()
                     })
                     .onTapGesture {
                         loadNextDataBatch()
@@ -39,9 +39,14 @@ struct PlayersView: View {
                 }
             }
             .onAppear(perform: {
-                  loadNextDataBatch()
+//                  loadNextDataBatch()
             })
-            .navigationTitle("Players")
+            .toolbar{
+                ToolbarItem(placement: .principal) {
+                    Image(systemName: "basketball.fill")
+                        .tint(.orange)
+                }
+            }
             .overlay {
                 if viewModel.players.isEmpty {
                     ContentUnavailableView(
@@ -58,21 +63,6 @@ struct PlayersView: View {
     
     private func loadNextDataBatch(){
         viewModel.fetchPlayers()
-    }
-}
-
-struct PlayerRow: View {
-    let player: Player
-    var body: some View {
-        HStack (spacing: 12) {
-            Image(systemName: "person.fill")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-            Text(player.firstName ?? "")
-        }
-        .padding(4)
-        
     }
 }
 
