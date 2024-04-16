@@ -20,7 +20,7 @@ class PlayersCoordinator: Coordinator {
     }
     
     func start() {
-        let playersViewModel = PlayersViewModel()
+        let playersViewModel = PlayersViewModel(networkManager: NetworkManager.shared)
         let view = PlayersView(viewModel: playersViewModel)
         bind(view: view)
         let navigationViewController = UINavigationController(rootViewController: UIHostingController(rootView: view))

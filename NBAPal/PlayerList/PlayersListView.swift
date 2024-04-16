@@ -19,12 +19,45 @@ struct PlayersView: View {
                 ForEach (viewModel.players, id: \.id) { player in
                     PlayerRow(player: player)
                 }
+                if !viewModel.players.isEmpty {
+                    LoadingView(isLoadingFail: viewModel.requestError != nil, isLoadingFinished: viewModel.isAllLoaded,
+                                loadingDetail:
+                                    Text("Loading Players..."),
+                                
+                                finishedView:
+                                    Text("All players loaded.")
+                                ,
+                                loadinFailView:
+                                    Text("Loading next Players failed. Tap to retry.")
+                    )
+                    .onAppear(perform: {
+                        loadNextDataBatch()
+                    })
+                    .onTapGesture {
+                        loadNextDataBatch()
+                    }
+                }
             }
-            .navigationBarTitle("Players")
-            .onAppear {
-                viewModel.fetchPlayers()
+            .onAppear(perform: {
+                  loadNextDataBatch()
+            })
+            .navigationTitle("Players")
+            .overlay {
+                if viewModel.players.isEmpty {
+                    ContentUnavailableView(
+                        label: {
+                            Label("Loading Players", systemImage: "basketball.fill")
+                        },
+                        description: {
+                            ProgressView()
+                        })
+                }
             }
         }
+    }
+    
+    private func loadNextDataBatch(){
+        viewModel.fetchPlayers()
     }
 }
 
@@ -44,5 +77,5 @@ struct PlayerRow: View {
 }
 
 #Preview {
-    PlayersView(viewModel: PlayersViewModel())
+    PlayersView(viewModel: PlayersViewModel(networkManager: NetworkManager.shared))
 }

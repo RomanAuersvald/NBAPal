@@ -15,17 +15,16 @@ enum RequestError: Error {
 class NetworkManager: NSObject {
     
     static let shared = NetworkManager()
-    let perPage = 35
     let apiSecret = "741c5815-4fec-475a-9c62-ad0a73b7907a"
     
     private var cursor = 0
     private var isPlayersComplete = false
     
-    func getPlayers(perPage: Int = 35, cursor: Int = 0) -> AnyPublisher<Wrap, Error> {
+    func getPlayers(perPage: Int, cursor: Int) -> AnyPublisher<Wrap, Error> {
         var urlComponents = URLComponents(string: "https://api.balldontlie.io/v1/players")!
         urlComponents.queryItems = [
-            URLQueryItem(name: "per_page", value: "\(NetworkManager.shared.perPage)"),
-            URLQueryItem(name: "cursor", value: "\(NetworkManager.shared.cursor)")
+            URLQueryItem(name: "per_page", value: "\(perPage)"),
+            URLQueryItem(name: "cursor", value: "\(cursor)")
         ]
         var request = URLRequest(url: urlComponents.url!)
         request.setValue(NetworkManager.shared.apiSecret, forHTTPHeaderField: "Authorization")
