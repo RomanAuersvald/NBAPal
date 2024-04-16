@@ -19,7 +19,6 @@ struct PlayerDetailView: View {
             
             ZStack {
                 VStack {
-                    
                     VStack {
                         Text("Personal")
                             .textCase(.uppercase)
@@ -50,6 +49,7 @@ struct PlayerDetailView: View {
                     VStack {
                         Text("Draft")
                             .textCase(.uppercase)
+                            .bold()
                         HStack {
                             Text("Draft Year")
                             Spacer()
@@ -71,6 +71,7 @@ struct PlayerDetailView: View {
                     VStack {
                         Text("Team")
                             .textCase(.uppercase)
+                            .bold()
                         HStack {
                             Text(viewModel.player.team?.fullName ?? "N/A")
                             Spacer()

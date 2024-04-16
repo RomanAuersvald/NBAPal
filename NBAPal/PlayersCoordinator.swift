@@ -61,7 +61,7 @@ extension PlayersCoordinator {
     
     private func showTeamView(for team: Team) {
         let viewModel = TeamViewModel(team: team)
-        let clubView = ClubView(viewModel: viewModel)
+        let clubView = TeamView(viewModel: viewModel)
         rootViewController.pushViewController(UIHostingController(rootView: clubView), animated: true)
     }
 }
