@@ -15,10 +15,22 @@ struct PlayerDetailView: View {
     
     var body: some View {
         VStack {
-            PlayerDetailHeader(player: viewModel.player)
+            PlayerDetailHeader(player: viewModel.player, playerImages: viewModel.playerImages)
             
             ZStack {
                 VStack {
+                    
+                    VStack {
+                        HStack {
+                            Text(viewModel.player.firstName ?? "N/A")
+                                .font(.largeTitle)
+                                .bold()
+                            Text(viewModel.player.lastName ?? "N/A")
+                                .font(.largeTitle)
+                                .bold()
+                            Spacer()
+                        }.padding(5)
+                    }
                     VStack {
                         Text("Personal")
                             .textCase(.uppercase)
@@ -103,13 +115,12 @@ struct PlayerDetailView: View {
 struct PlayerDetailHeader: View {
     
     let player: Player
+    let playerImages: [String]
     
     var body: some View {
         ZStack {
-            Color.gray
-            Image(systemName: "person.fill") // figure.basketball
-                .resizable()
-                .scaledToFit()
+            PageGallery(images: playerImages)
+                .frame(minHeight: 220)
             VStack(alignment: .trailing) {
                 HStack {
                     Text(player.jerseyNumber ?? "N/A")
@@ -123,20 +134,6 @@ struct PlayerDetailHeader: View {
                         .bold()
                 }.padding()
                 Spacer()
-            }
-            VStack {
-                Spacer()
-                HStack {
-                    Text(player.firstName ?? "N/A")
-                        .foregroundStyle(.white)
-                        .font(.title)
-                        .bold()
-                    Text(player.lastName ?? "N/A")
-                        .foregroundStyle(.white)
-                        .font(.title)
-                        .bold()
-                    Spacer()
-                }.padding(5)
             }
         }
         .frame(minHeight: 200, maxHeight: 250)

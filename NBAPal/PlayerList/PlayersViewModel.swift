@@ -16,9 +16,7 @@ final class PlayersViewModel: ObservableObject {
         case finished
         case failed(error: Error)
     }
-    
-    
-    
+        
     @Published var players: [Player] = []
     @Published var requestError: Error?
     private var state: PlayersVMLoadingState = .idle

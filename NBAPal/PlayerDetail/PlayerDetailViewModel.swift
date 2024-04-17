@@ -11,6 +11,8 @@ final class PlayerDetailViewModel: ObservableObject {
     
     var player: Player
     
+    let playerImages = ["person.fill", "figure.basketball"]
+    
     init(player: Player) {
         self.player = player
     }
