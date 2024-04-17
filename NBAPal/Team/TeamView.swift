@@ -7,17 +7,28 @@
 
 import SwiftUI
 import Combine
+import MapKit
 
 struct TeamView: View {
     
     @StateObject var viewModel: TeamViewModel
     
     var body: some View {
-        VStack {
-            TeamHeader(team: viewModel.team)
+        ScrollView {
+            TeamHeader(team: viewModel.team, teamImages: viewModel.teamImages)
             
             ZStack {
                 VStack {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Text(viewModel.team.fullName ?? "N/A")
+                                .font(.largeTitle)
+                                .bold()
+                            Spacer()
+                        }.padding(5)
+                        Spacer(minLength: 20)
+                    }
                     VStack {
                         Text("Info")
                             .textCase(.uppercase)
@@ -44,10 +55,24 @@ struct TeamView: View {
                         }.padding(.horizontal)
                     }
                     Divider()
-                    
+                    Spacer(minLength: 20)
+                    Text("Home Town")
+                        .textCase(.uppercase)
+                        .bold()
+                    Spacer(minLength: 20)
+                    if let location = viewModel.hometownLocation, let region = viewModel.hometownRegion {
+                        Map(initialPosition: MapCameraPosition.region(region)) {
+                            Marker(coordinate: location) {
+                                Text("\(viewModel.team.city!)")
+                            }
+                            
+                        }
+                        .mapStyle(.standard)
+                        .frame(minHeight: 220, maxHeight: 250)
+                        .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                    }
                 }
             }
-            Spacer()
         }
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20.0))
@@ -61,13 +86,12 @@ struct TeamView: View {
 struct TeamHeader: View {
     
     let team: Team
+    let teamImages: [String]
     
     var body: some View {
         ZStack {
-            Color.gray
-            Image(systemName: "person.fill")
-                .resizable()
-                .scaledToFit()
+            PageGallery(images: teamImages)
+                .frame(minHeight: 220)
             VStack(alignment: .trailing) {
                 HStack {
                     Text(team.abbreviation ?? "N/A")
@@ -78,23 +102,13 @@ struct TeamHeader: View {
                 }.padding()
                 Spacer()
             }
-            VStack {
-                Spacer()
-                HStack {
-                    Text(team.fullName ?? "N/A")
-                        .foregroundStyle(.white)
-                        .font(.title)
-                        .bold()
-                    Spacer()
-                }.padding(5)
-            }
         }
         .frame(minHeight: 200, maxHeight: 250)
         .clipShape(RoundedRectangle(cornerRadius: 20.0))
         .ignoresSafeArea(.all)
     }
 }
-    
+
 #Preview {
     TeamView(viewModel: TeamViewModel(team: MockData.shared.team))
 }

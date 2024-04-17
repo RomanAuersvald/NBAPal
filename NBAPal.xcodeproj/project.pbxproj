@@ -28,6 +28,8 @@
 		30223F8E2BCE637900AB156D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F8D2BCE637900AB156D /* LoadingView.swift */; };
 		30223F902BCE87A400AB156D /* PlayerListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F8F2BCE87A400AB156D /* PlayerListRow.swift */; };
 		30223F922BCE892000AB156D /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F912BCE892000AB156D /* MockData.swift */; };
+		30223F942BCFBEF700AB156D /* CLLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F932BCFBEF700AB156D /* CLLocationExtension.swift */; };
+		30223F982BCFC81D00AB156D /* PageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F972BCFC81D00AB156D /* PageGallery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		30223F8D2BCE637900AB156D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		30223F8F2BCE87A400AB156D /* PlayerListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListRow.swift; sourceTree = "<group>"; };
 		30223F912BCE892000AB156D /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		30223F932BCFBEF700AB156D /* CLLocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationExtension.swift; sourceTree = "<group>"; };
+		30223F972BCFC81D00AB156D /* PageGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageGallery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +101,11 @@
 				30223F742BCD6A3800AB156D /* PlayersCoordinator.swift */,
 				30223F882BCD6EE800AB156D /* PlayerList */,
 				30223F892BCD894200AB156D /* PlayerDetail */,
-				30223F8A2BCD894E00AB156D /* Club */,
+				30223F8A2BCD894E00AB156D /* Team */,
 				30223F8B2BCD99A800AB156D /* NetworkManager.swift */,
-				30223F8D2BCE637900AB156D /* LoadingView.swift */,
+				30223F962BCFC7E700AB156D /* ReusableViews */,
 				30223F912BCE892000AB156D /* MockData.swift */,
+				30223F952BCFC7D700AB156D /* Extensions */,
 			);
 			path = NBAPal;
 			sourceTree = "<group>";
@@ -134,14 +139,31 @@
 			path = PlayerDetail;
 			sourceTree = "<group>";
 		};
-		30223F8A2BCD894E00AB156D /* Club */ = {
+		30223F8A2BCD894E00AB156D /* Team */ = {
 			isa = PBXGroup;
 			children = (
 				30223F822BCD6D3900AB156D /* Team.swift */,
 				30223F842BCD6D4300AB156D /* TeamViewModel.swift */,
 				30223F862BCD6D5700AB156D /* TeamView.swift */,
 			);
-			path = Club;
+			path = Team;
+			sourceTree = "<group>";
+		};
+		30223F952BCFC7D700AB156D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				30223F932BCFBEF700AB156D /* CLLocationExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		30223F962BCFC7E700AB156D /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				30223F8D2BCE637900AB156D /* LoadingView.swift */,
+				30223F972BCFC81D00AB156D /* PageGallery.swift */,
+			);
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +241,11 @@
 				30223F852BCD6D4300AB156D /* TeamViewModel.swift in Sources */,
 				30223F902BCE87A400AB156D /* PlayerListRow.swift in Sources */,
 				30223F7F2BCD6D2900AB156D /* PlayerDetailViewModel.swift in Sources */,
+				30223F942BCFBEF700AB156D /* CLLocationExtension.swift in Sources */,
 				30223F8E2BCE637900AB156D /* LoadingView.swift in Sources */,
 				30223F8C2BCD99A800AB156D /* NetworkManager.swift in Sources */,
 				30223F722BCD67B500AB156D /* Coordinator.swift in Sources */,
+				30223F982BCFC81D00AB156D /* PageGallery.swift in Sources */,
 				30223F922BCE892000AB156D /* MockData.swift in Sources */,
 				30223F5C2BCD66A600AB156D /* AppDelegate.swift in Sources */,
 				30223F872BCD6D5700AB156D /* TeamView.swift in Sources */,

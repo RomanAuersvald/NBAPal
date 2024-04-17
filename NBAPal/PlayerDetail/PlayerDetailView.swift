@@ -107,7 +107,7 @@ struct PlayerDetailHeader: View {
     var body: some View {
         ZStack {
             Color.gray
-            Image(systemName: "person.fill")
+            Image(systemName: "person.fill") // figure.basketball
                 .resizable()
                 .scaledToFit()
             VStack(alignment: .trailing) {
