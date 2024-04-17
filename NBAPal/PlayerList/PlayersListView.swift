@@ -13,10 +13,11 @@ struct PlayersView: View {
     @StateObject var viewModel: PlayersViewModel
     let didClickPlayer = PassthroughSubject<Player, Never>()
     @State var isFirstAppear = true
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach (viewModel.players, id: \.id) { player in
+                ForEach (viewModel.searchText.isEmpty ? viewModel.players : viewModel.searchedPlayers, id: \.id) { player in
                     Button(action: {
                         didClickPlayer.send(player)
                     }, label: {
@@ -25,7 +26,7 @@ struct PlayersView: View {
                     .buttonStyle(.plain)
                     
                 }
-                if !viewModel.players.isEmpty {
+                if viewModel.searchText.isEmpty ? !viewModel.players.isEmpty : !viewModel.searchedPlayers.isEmpty {
                     LoadingView(isLoadingFail: viewModel.requestError != nil, isLoadingFinished: viewModel.isAllLoaded,
                                 loadingDetail:
                                     Text("Loading Players..."),
@@ -67,11 +68,32 @@ struct PlayersView: View {
                             ProgressView()
                         })
                 }
+                if !viewModel.searchText.isEmpty && viewModel.searchedPlayers.isEmpty{
+                    ContentUnavailableView(
+                        label: {
+                            Label("Search for players", systemImage: "magnifyingglass.circle.fill")
+                        },
+                        description: {
+                            Text("Press GO to search")
+                        })
+                }
+            }
+            .searchable(text: $viewModel.searchText)
+            .onSubmit(of: .search) {
+                viewModel.fetchPlayers()
+            }
+            .alert(isPresented: Binding<Bool>(
+                get: { self.viewModel.state == .failed },
+                set: { _ in self.viewModel.state = .idle }
+            )) {
+                Alert(title: Text("Error occured"),
+                      message: Text(""),
+                      dismissButton: .default(Text("OK")))
             }
         }
     }
     
-    private func loadNextDataBatch(){
+    private func loadNextDataBatch() {
         viewModel.fetchPlayers()
     }
 }

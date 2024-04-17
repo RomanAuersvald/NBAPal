@@ -20,12 +20,19 @@ class NetworkManager: NSObject {
     private var cursor = 0
     private var isPlayersComplete = false
     
-    func getPlayers(perPage: Int, cursor: Int) -> AnyPublisher<Wrap, Error> {
+    func getPlayers(perPage: Int, cursor: Int?, searchText: String) -> AnyPublisher<Wrap, Error> {
         var urlComponents = URLComponents(string: "https://api.balldontlie.io/v1/players")!
         urlComponents.queryItems = [
             URLQueryItem(name: "per_page", value: "\(perPage)"),
-            URLQueryItem(name: "cursor", value: "\(cursor)")
         ]
+        if cursor != nil {
+            let cursorQuery = URLQueryItem(name: "cursor", value: "\(cursor!)")
+            urlComponents.queryItems?.append(cursorQuery)
+        }
+        if !searchText.isEmpty {
+            let searchQuery = URLQueryItem(name: "search", value: searchText)
+            urlComponents.queryItems?.append(searchQuery)
+        }
         var request = URLRequest(url: urlComponents.url!)
         request.setValue(NetworkManager.shared.apiSecret, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

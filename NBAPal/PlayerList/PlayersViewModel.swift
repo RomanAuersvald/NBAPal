@@ -8,54 +8,98 @@
 import Foundation
 import Combine
 
+
 final class PlayersViewModel: ObservableObject {
     
-    enum PlayersVMLoadingState {
+    enum PlayersVMLoadingState: Equatable {
         case idle
         case loading
         case finished
-        case failed(error: Error)
+        case failed
     }
-        
+    
     @Published var players: [Player] = []
+    @Published var searchedPlayers: [Player] = []
     @Published var requestError: Error?
-    private var state: PlayersVMLoadingState = .idle
+    @Published var state: PlayersVMLoadingState = .idle
     private let perPage = 35
     private var cursor = 0
+    private var searchCursor: Int? = nil // default for search is none
+    private var isSearchingPlayersAllLoaded: Bool = false
+    private var isPlayersLoaded: Bool = false
+    
     @Published var isAllLoaded: Bool = false
+    @Published var searchText = ""
+    private var lastSearchText = ""
     
     let networkManager: NetworkManager
     
     private var cancellable: AnyCancellable?
     
     
-    init(networkManager: NetworkManager){
+    init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }
     
+    private func searching() -> Bool {
+        return !searchText.isEmpty
+    }
     
     func fetchPlayers() {
-//        self.players = [
-//            Player(id: 1, name: "Player 1", clubID: 1),
-//            Player(id: 2, name: "Player 2", clubID: 2),
-//            Player(id: 3, name: "Player 3", clubID: 3)
-//        ]
-        if !isAllLoaded {
+        if searchText != lastSearchText {
+            lastSearchText = searchText
+            self.searchedPlayers.removeAll()
+            self.isAllLoaded = false
+            self.isPlayersLoaded = false
+            self.isSearchingPlayersAllLoaded = false
+        }
+        if searching() && !isSearchingPlayersAllLoaded {
             state = .loading
-            cancellable = networkManager.getPlayers(perPage: perPage, cursor: cursor)
+            cancellable = networkManager.getPlayers(perPage: perPage, cursor: searchCursor, searchText: searchText)
                 .receive(on: DispatchQueue.main)
                 .sink { completion in
-                    switch completion{
+                    switch completion {
                     case .failure(let error):
                         print(error)
                         self.requestError = error
-                        self.state = .failed(error: error)
+                        self.state = .failed
+                    case .finished:
+                        print("finished")
+                    }
+                } receiveValue: { [unowned self] receivedDataWrapper in
+                    guard let receivedPlayers = receivedDataWrapper.data else { self.state = .idle; return }
+                    
+                    self.searchedPlayers.append(contentsOf: receivedPlayers)
+                    if let nextCursor = receivedDataWrapper.meta?.nextCursor {
+                        self.searchCursor = nextCursor
+                    }
+                    self.state = .finished
+                    
+                    if receivedPlayers.count < self.perPage {
+                        self.isSearchingPlayersAllLoaded = true
+                        self.isAllLoaded = true
+                    }
+                }
+        }
+        
+        if !searching() && !isPlayersLoaded {
+            self.isAllLoaded = false
+            state = .loading
+            cancellable = networkManager.getPlayers(perPage: perPage, cursor: cursor, searchText: searchText)
+                .receive(on: DispatchQueue.main)
+                .sink { completion in
+                    switch completion {
+                    case .failure(let error):
+                        print(error)
+                        self.requestError = error
+                        self.state = .failed
                     case .finished:
                         print("finished")
                     }
                     
-                } receiveValue: { receivedDataWrapper in
+                } receiveValue: { [unowned self] receivedDataWrapper in
                     guard let receivedPlayers = receivedDataWrapper.data else { self.state = .idle; return }
+                    
                     self.players.append(contentsOf: receivedPlayers)
                     if let nextCursor = receivedDataWrapper.meta?.nextCursor {
                         self.cursor = nextCursor
@@ -65,6 +109,7 @@ final class PlayersViewModel: ObservableObject {
                     self.state = .finished
                     
                     if receivedPlayers.count < self.perPage {
+                        self.isPlayersLoaded = true
                         self.isAllLoaded = true
                     }
                 }
