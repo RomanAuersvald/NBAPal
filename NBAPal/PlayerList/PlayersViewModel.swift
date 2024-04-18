@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-
-final class PlayersViewModel: ObservableObject {
+@Observable
+final class PlayersViewModel {
     
     enum PlayersVMLoadingState: Equatable {
         case idle
@@ -18,18 +18,18 @@ final class PlayersViewModel: ObservableObject {
         case failed
     }
     
-    @Published var players: [Player] = []
-    @Published var searchedPlayers: [Player] = []
-    @Published var requestError: NBAPLoadingError?
-    @Published var state: PlayersVMLoadingState = .idle
+     var players: [Player] = []
+     var searchedPlayers: [Player] = []
+     var requestError: NBAPLoadingError?
+     var state: PlayersVMLoadingState = .idle
     private let perPage = 35
     private var cursor = 0
     private var searchCursor: Int? = nil // default for search is none
     private var isSearchingPlayersAllLoaded: Bool = false
     private var isPlayersLoaded: Bool = false
     
-    @Published var isAllLoaded: Bool = false
-    @Published var searchText = ""
+     var isAllLoaded: Bool = false
+     var searchText = ""
     private var lastSearchText = ""
     
     private let networkManager: NetworkManager

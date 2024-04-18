@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class PlayerDetailViewModel: ObservableObject {
     
     var player: Player

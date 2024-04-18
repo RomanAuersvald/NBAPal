@@ -33,8 +33,10 @@ class PlayersCoordinator: Coordinator {
     private func bind(view: PlayersView) {
         view.didClickPlayer
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] player in
-                self?.showPlayerDetail(for: player)
+            .sink(receiveValue: { [unowned self] player in
+                Task { @MainActor in
+                    self.showPlayerDetail(for: player)
+                }
             })
             .store(in: &cancellables)
         
@@ -49,8 +51,10 @@ class PlayersCoordinator: Coordinator {
     private func bind(view: PlayerDetailView) {
         view.didClickPlayerClubDetail
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] team in
-                self?.showTeamView(for: team)
+            .sink(receiveValue: { [unowned self] team in
+                Task { @MainActor in
+                    self.showTeamView(for: team)
+                }
             })
             .store(in: &cancellables)
     }
@@ -66,14 +70,14 @@ extension PlayersCoordinator {
         rootViewController.topViewController?.present(alertController, animated: true)
     }
     
-    private func showPlayerDetail(for player: Player) {
+    @MainActor private func showPlayerDetail(for player: Player) {
         let viewModel = PlayerDetailViewModel(player: player)
         let playerDetailView = PlayerDetailView(viewModel: viewModel)
         bind(view: playerDetailView)
         rootViewController.pushViewController(UIHostingController(rootView: playerDetailView), animated: true)
     }
     
-    private func showTeamView(for team: Team) {
+    @MainActor private func showTeamView(for team: Team) {
         let viewModel = TeamViewModel(team: team)
         let clubView = TeamView(viewModel: viewModel)
         rootViewController.pushViewController(UIHostingController(rootView: clubView), animated: true)

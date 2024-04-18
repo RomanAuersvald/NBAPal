@@ -10,7 +10,7 @@ import Combine
 
 struct PlayersView: View {
     
-    @StateObject var viewModel: PlayersViewModel
+    @State var viewModel: PlayersViewModel
     let didClickPlayer = PassthroughSubject<Player, Never>()
     let errorOccurred = PassthroughSubject<LocalizedError, Never>()
     @State var isFirstAppear = true

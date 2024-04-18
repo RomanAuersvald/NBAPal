@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 
+@MainActor
 final class TeamViewModel: ObservableObject {
     
     var team: Team
