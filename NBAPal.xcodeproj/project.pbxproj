@@ -94,12 +94,11 @@
 			children = (
 				30223F5B2BCD66A600AB156D /* AppDelegate.swift */,
 				30223F5D2BCD66A600AB156D /* SceneDelegate.swift */,
-				30223F6F2BCD678A00AB156D /* AppCoordinator.swift */,
+				30223FA02BD1B1F300AB156D /* Coordinators */,
 				30223F642BCD66A800AB156D /* Assets.xcassets */,
 				30223F662BCD66A800AB156D /* LaunchScreen.storyboard */,
 				30223F692BCD66A900AB156D /* Info.plist */,
 				30223F732BCD685300AB156D /* Protocols */,
-				30223F742BCD6A3800AB156D /* PlayersCoordinator.swift */,
 				30223F882BCD6EE800AB156D /* PlayerList */,
 				30223F892BCD894200AB156D /* PlayerDetail */,
 				30223F8A2BCD894E00AB156D /* Team */,
@@ -175,6 +174,15 @@
 				30223F8B2BCD99A800AB156D /* NBAPalNetworkManager.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		30223FA02BD1B1F300AB156D /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				30223F6F2BCD678A00AB156D /* AppCoordinator.swift */,
+				30223F742BCD6A3800AB156D /* PlayersCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
