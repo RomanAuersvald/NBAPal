@@ -9,10 +9,6 @@ import UIKit
 import Combine
 import OSLog
 
-enum RequestError: Error {
-    case badRequest
-}
-
 class NetworkManager: NSObject {
     
     static let shared = NetworkManager()
@@ -47,8 +43,6 @@ class NetworkManager: NSObject {
             .decode(type: Wrap.self, decoder: decoder)
             .eraseToAnyPublisher()
     }
-    
-
 }
 
 struct Wrap: Codable{
