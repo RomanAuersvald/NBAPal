@@ -30,26 +30,26 @@ struct TeamView: View {
                         Spacer(minLength: 20)
                     }
                     VStack {
-                        Text("Info")
+                        Text(LocalizedStringKey("Info"))
                             .textCase(.uppercase)
                             .bold()
                         HStack {
-                            Text("Conference")
+                            Text(LocalizedStringKey("Conference"))
                             Spacer()
                             Text(viewModel.team.conference ?? "N/A")
                         }.padding(.horizontal)
                         HStack {
-                            Text("Division")
+                            Text(LocalizedStringKey("Division"))
                             Spacer()
                             Text(viewModel.team.division ?? "N/A")
                         }.padding(.horizontal)
                         HStack {
-                            Text("City")
+                            Text(LocalizedStringKey("City"))
                             Spacer()
                             Text(viewModel.team.city ?? "N/A")
                         }.padding(.horizontal)
                         HStack {
-                            Text("Name")
+                            Text(LocalizedStringKey("Name"))
                             Spacer()
                             Text(viewModel.team.name ?? "N/A")
                         }.padding(.horizontal)
@@ -57,7 +57,7 @@ struct TeamView: View {
                     Divider()
                     Spacer(minLength: 20)
                     if let location = viewModel.hometownLocation, let region = viewModel.hometownRegion {
-                        Text("Home Town")
+                        Text(LocalizedStringKey("HomeTown"))
                             .textCase(.uppercase)
                             .bold()
                         Spacer(minLength: 20)

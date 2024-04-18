@@ -41,5 +41,5 @@ struct LoadingView<Content: View>: View {
 }
 
 #Preview {
-    LoadingView(isLoadingFail: false, isLoadingFinished: false, loadingDetail: Text("Loading next Players..."), finishedView: Text("Loading finished"), loadinFailView: Text("Failed"))
+    LoadingView(isLoadingFail: false, isLoadingFinished: false, loadingDetail: Text("Loading next Players..."), finishedView: Text(LocalizedStringKey("LoadingFinished")), loadinFailView: Text("Failed"))
 }

@@ -33,9 +33,9 @@ struct PlayersView: View {
                 if !viewModel.isSearchingActive() ? !viewModel.players.isEmpty : !viewModel.searchedPlayers.isEmpty {
                     LoadingView(isLoadingFail: viewModel.requestError != nil, isLoadingFinished: viewModel.isAllLoaded,
                                 loadingDetail:
-                                    Text("Loading Players..."),
+                                    Text(LocalizedStringKey("Loading")),
                                 finishedView:
-                                    Text("All players loaded.")
+                                    Text(LocalizedStringKey("PlayersLoaded"))
                                 ,
                                 loadinFailView:
                                     Text(viewModel.requestError?.errorDescription ?? "")
@@ -55,18 +55,18 @@ struct PlayersView: View {
                     isFirstAppear = false
                 }
             })
-            .navigationTitle("Players")
-            .toolbar{
-                ToolbarItem(placement: .principal) {
-                    Image(systemName: "basketball.fill")
-                        .tint(.orange)
-                }
-            }
+            .navigationTitle(LocalizedStringKey("Players"))
+//            .toolbar{
+//                ToolbarItem(placement: .topBarLeading) {
+//                    Image(systemName: "basketball.fill")
+//                        .tint(.orange)
+//                }
+//            }
             .overlay {
                 if viewModel.players.isEmpty && viewModel.requestError == nil {
                     ContentUnavailableView(
                         label: {
-                            Label("Loading Players", systemImage: "basketball.fill")
+                            Label(LocalizedStringKey("LoadingPlayers"), systemImage: "basketball.fill")
                         },
                         description: {
                             ProgressView()
@@ -75,19 +75,19 @@ struct PlayersView: View {
                 if viewModel.isSearchingActive() && viewModel.searchedPlayers.isEmpty {
                     ContentUnavailableView(
                         label: {
-                            Label("Search for players", systemImage: "magnifyingglass.circle.fill")
+                            Label(LocalizedStringKey("SearchForPlayers"), systemImage: "magnifyingglass.circle.fill")
                         },
                         description: {
-                            Text("Press GO to search")
+                            Text(LocalizedStringKey("PressGoToSearch"))
                         })
                 }
                 if viewModel.requestError != nil && (viewModel.players.isEmpty || viewModel.searchedPlayers.isEmpty){
                     ContentUnavailableView(
                         label: {
-                            Label("No network", systemImage: "network.slash")
+                            Label(LocalizedStringKey("NoNetwork"), systemImage: "network.slash")
                         },
                         description: {
-                            Text("Check your internet connection and try again.")
+                            Text(LocalizedStringKey("CheckInternetTryAgain"))
                         })
                 }
             }

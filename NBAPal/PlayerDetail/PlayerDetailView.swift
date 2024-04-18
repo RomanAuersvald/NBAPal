@@ -68,17 +68,17 @@ struct PlayerDetailView: View {
                             .textCase(.uppercase)
                             .bold()
                         HStack {
-                            Text("Draft Year")
+                            Text("DraftYear")
                             Spacer()
                             Text(viewModel.player.draftYear?.description ?? "N/A")
                         }.padding(.horizontal)
                         HStack {
-                            Text("Draft Round")
+                            Text("DraftRound")
                             Spacer()
                             Text(viewModel.player.draftRound?.description ?? "N/A")
                         }.padding(.horizontal)
                         HStack {
-                            Text("Draft Number")
+                            Text("DraftNumber")
                             Spacer()
                             Text(viewModel.player.draftNumber?.description ?? "N/A")
                         }.padding(.horizontal)
@@ -149,5 +149,6 @@ struct PlayerDetailHeader: View {
 
 #Preview {
     PlayerDetailView(viewModel: PlayerDetailViewModel(player: MockData.shared.player))
+        .environment(\.locale, .init(identifier: "cs"))
 }
 
