@@ -58,6 +58,7 @@ final class PlayersViewModel {
                         self.requestError = .networkError(error: error)
                         Logger.networking.error("Search request error \(error)")
                     case .finished:
+                        self.requestError = nil
                         Logger.networking.info("Search request for \(self.searchText) finished")
                     }
                 } receiveValue: { [unowned self] receivedDataWrapper in
@@ -88,6 +89,7 @@ final class PlayersViewModel {
                         self.requestError = .networkError(error: error)
                         Logger.networking.error("Players request error: \(error)")
                     case .finished:
+                        self.requestError = nil
                         Logger.networking.info("Players request finished")
                     }
                     

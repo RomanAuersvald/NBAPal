@@ -63,7 +63,7 @@ struct PlayersView: View {
                 }
             }
             .overlay {
-                if viewModel.players.isEmpty {
+                if viewModel.players.isEmpty && viewModel.requestError == nil {
                     ContentUnavailableView(
                         label: {
                             Label("Loading Players", systemImage: "basketball.fill")
@@ -72,7 +72,7 @@ struct PlayersView: View {
                             ProgressView()
                         })
                 }
-                if !viewModel.searchText.isEmpty && viewModel.searchedPlayers.isEmpty{
+                if viewModel.isSearchingActive() && viewModel.searchedPlayers.isEmpty {
                     ContentUnavailableView(
                         label: {
                             Label("Search for players", systemImage: "magnifyingglass.circle.fill")
@@ -81,14 +81,28 @@ struct PlayersView: View {
                             Text("Press GO to search")
                         })
                 }
+                if viewModel.requestError != nil {
+                    ContentUnavailableView(
+                        label: {
+                            Label("No network", systemImage: "network.slash")
+                        },
+                        description: {
+                            Text("Check your internet connection and try again.")
+                        })
+                }
             }
             .searchable(text: $viewModel.searchText)
             .onSubmit(of: .search) {
                 viewModel.fetchPlayers()
             }
             .onChange(of: viewModel.requestError, {
-                errorOccurred.send(viewModel.requestError!)
+                if viewModel.requestError != nil {
+                    errorOccurred.send(viewModel.requestError!)
+                }
             })
+            .refreshable {
+                viewModel.fetchPlayers()
+            }
         }
     }
     
