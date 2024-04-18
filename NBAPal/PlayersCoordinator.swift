@@ -20,7 +20,7 @@ class PlayersCoordinator: Coordinator {
     init(){
         rootViewController = UINavigationController()
         rootViewController.navigationBar.prefersLargeTitles = true
-        sharedViewModel = PlayersViewModel(networkManager: NetworkManager.shared)
+        sharedViewModel = PlayersViewModel(networkManager: NBAPalNetworkManager.shared)
         Logger.navigation.log("Player coordinator initialized")
     }
     

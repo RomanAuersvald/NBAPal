@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct NBAPalConfiguration {
     let networkConfiguration = NetworkConfiguration()
     let resultsPerPage = 35

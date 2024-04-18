@@ -98,5 +98,5 @@ struct PlayersView: View {
 }
 
 #Preview {
-    PlayersView(viewModel: PlayersViewModel(networkManager: NetworkManager.shared))
+    PlayersView(viewModel: PlayersViewModel(networkManager: NBAPalNetworkManager.shared))
 }

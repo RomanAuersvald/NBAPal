@@ -9,9 +9,9 @@ import UIKit
 import Combine
 import OSLog
 
-class NetworkManager: NSObject {
+class NBAPalNetworkManager: NetworkManager {
     
-    static let shared = NetworkManager()
+    static let shared = NBAPalNetworkManager()
     private let configuration = NBAPalConfiguration().networkConfiguration
     private var cursor = 0
     private var isPlayersComplete = false
