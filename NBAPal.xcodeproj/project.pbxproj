@@ -29,6 +29,7 @@
 		30223F942BCFBEF700AB156D /* CLLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F932BCFBEF700AB156D /* CLLocationExtension.swift */; };
 		30223F982BCFC81D00AB156D /* PageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F972BCFC81D00AB156D /* PageGallery.swift */; };
 		30223F9A2BD15BF400AB156D /* OSLogExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F992BD15BF400AB156D /* OSLogExtension.swift */; };
+		30223F9D2BD16B3400AB156D /* NBAPalConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30223F9C2BD16B3400AB156D /* NBAPalConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		30223F932BCFBEF700AB156D /* CLLocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationExtension.swift; sourceTree = "<group>"; };
 		30223F972BCFC81D00AB156D /* PageGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageGallery.swift; sourceTree = "<group>"; };
 		30223F992BD15BF400AB156D /* OSLogExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogExtension.swift; sourceTree = "<group>"; };
+		30223F9C2BD16B3400AB156D /* NBAPalConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBAPalConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				30223F962BCFC7E700AB156D /* ReusableViews */,
 				30223F912BCE892000AB156D /* MockData.swift */,
 				30223F952BCFC7D700AB156D /* Extensions */,
+				30223F9C2BD16B3400AB156D /* NBAPalConfiguration.swift */,
 			);
 			path = NBAPal;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				30223F922BCE892000AB156D /* MockData.swift in Sources */,
 				30223F5C2BCD66A600AB156D /* AppDelegate.swift in Sources */,
 				30223F872BCD6D5700AB156D /* TeamView.swift in Sources */,
+				30223F9D2BD16B3400AB156D /* NBAPalConfiguration.swift in Sources */,
 				30223F5E2BCD66A600AB156D /* SceneDelegate.swift in Sources */,
 				30223F792BCD6D0100AB156D /* PlayersViewModel.swift in Sources */,
 				30223F9A2BD15BF400AB156D /* OSLogExtension.swift in Sources */,

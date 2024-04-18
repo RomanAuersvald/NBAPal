@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PlayerListRow: View {
     let player: Player
+    let isShowPlayerID: Bool
     var body: some View {
         HStack (spacing: 5) {
             ZStack {
@@ -16,10 +17,12 @@ struct PlayerListRow: View {
                     .resizable()
                     .frame(width: 30, height: 30)
                 .clipShape(Circle())
-                Text("\(player.id ?? -1)")
-                    .font(.footnote)
-                    .foregroundStyle(.gray)
-                    .offset(x: -25, y: 25)
+                if isShowPlayerID {
+                    Text("\(player.id ?? -1)")
+                        .font(.footnote)
+                        .foregroundStyle(.gray)
+                        .offset(x: -25, y: 25)
+                }
             }
             
             VStack(alignment: .leading) {
@@ -52,6 +55,6 @@ struct PlayerListRow: View {
 
 #Preview {
     List {
-        PlayerListRow(player: MockData.shared.player)
+        PlayerListRow(player: MockData.shared.player, isShowPlayerID: NBAPalConfiguration().isShowingPlayerID)
     }
 }

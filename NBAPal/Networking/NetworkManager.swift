@@ -12,14 +12,13 @@ import OSLog
 class NetworkManager: NSObject {
     
     static let shared = NetworkManager()
-    let apiSecret = "741c5815-4fec-475a-9c62-ad0a73b7907a"
-    
+    private let configuration = NBAPalConfiguration().networkConfiguration
     private var cursor = 0
     private var isPlayersComplete = false
     private let decoder = JSONDecoder()
     
     func getPlayers(perPage: Int, cursor: Int?, searchText: String) -> AnyPublisher<Wrap, Error> {
-        var urlComponents = URLComponents(string: "https://api.balldontlie.io/v1/players")!
+        var urlComponents = URLComponents(string: configuration.backeddURL)!
         urlComponents.queryItems = [
             URLQueryItem(name: "per_page", value: "\(perPage)"),
         ]
@@ -32,7 +31,7 @@ class NetworkManager: NSObject {
             urlComponents.queryItems?.append(searchQuery)
         }
         var request = URLRequest(url: urlComponents.url!)
-        request.setValue(NetworkManager.shared.apiSecret, forHTTPHeaderField: "Authorization")
+        request.setValue(configuration.apiSecret, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "GET"
         

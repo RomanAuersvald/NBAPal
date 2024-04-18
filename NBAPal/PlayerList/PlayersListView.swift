@@ -14,6 +14,7 @@ struct PlayersView: View {
     @State var viewModel: PlayersViewModel
     let didClickPlayer = PassthroughSubject<Player, Never>()
     let errorOccurred = PassthroughSubject<LocalizedError, Never>()
+    let isShowingPlayerID = NBAPalConfiguration().isShowingPlayerID
     @State var isFirstAppear = true
     
     var body: some View {
@@ -24,7 +25,7 @@ struct PlayersView: View {
 //                        Logger.userInteraction.log("Clicked \(player.fullName)")
                         didClickPlayer.send(player)
                     }, label: {
-                        PlayerListRow(player: player)
+                        PlayerListRow(player: player, isShowPlayerID: isShowingPlayerID)
                     })
                     .buttonStyle(.plain)
                     

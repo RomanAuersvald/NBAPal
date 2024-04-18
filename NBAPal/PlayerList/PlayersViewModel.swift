@@ -15,7 +15,7 @@ final class PlayersViewModel {
     var players: [Player] = []
     var searchedPlayers: [Player] = []
     var requestError: NBAPLoadingError?
-    private let perPage = 35
+    private let perPage: Int
     private var cursor = 0
     private var searchCursor: Int? = nil // default for search is none
     private var isSearchingPlayersAllLoaded: Bool = false
@@ -32,6 +32,7 @@ final class PlayersViewModel {
     
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
+        self.perPage = NBAPalConfiguration().resultsPerPage
     }
     
     func isSearchingActive() -> Bool {
