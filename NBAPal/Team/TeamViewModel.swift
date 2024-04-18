@@ -24,8 +24,8 @@ final class TeamViewModel: ObservableObject {
     }
     
     private func loadTeamCityLocation() {
-        guard let teamCity = team.city, let conference = team.conference, let division = team.division else {return}
-        self.locationManager.getLocation(forPlaceCalled: "\(teamCity), \(division) \(conference), US") { location in
+        guard let teamCity = team.city else {return}
+        self.locationManager.getLocation(forPlaceCalled: "\(teamCity), US") { location in
                guard let location = location else { return }
                
                let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)

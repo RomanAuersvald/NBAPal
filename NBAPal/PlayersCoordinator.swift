@@ -37,6 +37,13 @@ class PlayersCoordinator: Coordinator {
                 self?.showPlayerDetail(for: player)
             })
             .store(in: &cancellables)
+        
+        view.errorOccurred
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] localizedError in
+                self?.showErrorAlert(with: localizedError)
+            })
+            .store(in: &cancellables)
     }
     
     private func bind(view: PlayerDetailView) {
@@ -50,8 +57,15 @@ class PlayersCoordinator: Coordinator {
     
 }
 
-// MARK: Navigation Related Extensions
+// MARK: Navigation Related Extension
 extension PlayersCoordinator {
+    
+    private func showErrorAlert(with error: LocalizedError){ //LocalizedError
+        let alertController = UIAlertController(title: error.failureReason, message: error.errorDescription, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { _ in }))
+        rootViewController.topViewController?.present(alertController, animated: true)
+    }
+    
     private func showPlayerDetail(for player: Player) {
         let viewModel = PlayerDetailViewModel(player: player)
         let playerDetailView = PlayerDetailView(viewModel: viewModel)

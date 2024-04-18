@@ -12,12 +12,13 @@ struct PlayersView: View {
     
     @StateObject var viewModel: PlayersViewModel
     let didClickPlayer = PassthroughSubject<Player, Never>()
+    let errorOccurred = PassthroughSubject<LocalizedError, Never>()
     @State var isFirstAppear = true
     
     var body: some View {
         NavigationView {
             List {
-                ForEach (viewModel.searchText.isEmpty ? viewModel.players : viewModel.searchedPlayers, id: \.id) { player in
+                ForEach (!viewModel.isSearchingActive() ? viewModel.players : viewModel.searchedPlayers, id: \.id) { player in
                     Button(action: {
                         didClickPlayer.send(player)
                     }, label: {
@@ -26,16 +27,15 @@ struct PlayersView: View {
                     .buttonStyle(.plain)
                     
                 }
-                if viewModel.searchText.isEmpty ? !viewModel.players.isEmpty : !viewModel.searchedPlayers.isEmpty {
+                if !viewModel.isSearchingActive() ? !viewModel.players.isEmpty : !viewModel.searchedPlayers.isEmpty {
                     LoadingView(isLoadingFail: viewModel.requestError != nil, isLoadingFinished: viewModel.isAllLoaded,
                                 loadingDetail:
                                     Text("Loading Players..."),
-                                
                                 finishedView:
                                     Text("All players loaded.")
                                 ,
                                 loadinFailView:
-                                    Text("Loading next Players failed. Tap to retry.")
+                                    Text(viewModel.requestError?.errorDescription ?? "")
                     )
                     .onAppear(perform: {
                         loadNextDataBatch()
@@ -82,6 +82,9 @@ struct PlayersView: View {
             .onSubmit(of: .search) {
                 viewModel.fetchPlayers()
             }
+            .onChange(of: viewModel.requestError, {
+                errorOccurred.send(viewModel.requestError!)
+            })
             .alert(isPresented: Binding<Bool>(
                 get: { self.viewModel.state == .failed },
                 set: { _ in self.viewModel.state = .idle }

@@ -26,7 +26,7 @@ struct TeamView: View {
                                 .font(.largeTitle)
                                 .bold()
                             Spacer()
-                        }.padding(5)
+                        }.padding(.horizontal)
                         Spacer(minLength: 20)
                     }
                     VStack {
@@ -56,11 +56,12 @@ struct TeamView: View {
                     }
                     Divider()
                     Spacer(minLength: 20)
-                    Text("Home Town")
-                        .textCase(.uppercase)
-                        .bold()
-                    Spacer(minLength: 20)
                     if let location = viewModel.hometownLocation, let region = viewModel.hometownRegion {
+                        Text("Home Town")
+                            .textCase(.uppercase)
+                            .bold()
+                        Spacer(minLength: 20)
+                        
                         Map(initialPosition: MapCameraPosition.region(region)) {
                             Marker(coordinate: location) {
                                 Text("\(viewModel.team.city!)")
@@ -96,7 +97,7 @@ struct TeamHeader: View {
                 HStack {
                     Text(team.abbreviation ?? "N/A")
                         .font(.system(size: 50))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color("TeamAbbreviationColor"))
                         .bold()
                     Spacer()
                 }.padding()

@@ -20,7 +20,7 @@ final class PlayersViewModel: ObservableObject {
     
     @Published var players: [Player] = []
     @Published var searchedPlayers: [Player] = []
-    @Published var requestError: Error?
+    @Published var requestError: NBAPLoadingError?
     @Published var state: PlayersVMLoadingState = .idle
     private let perPage = 35
     private var cursor = 0
@@ -32,7 +32,7 @@ final class PlayersViewModel: ObservableObject {
     @Published var searchText = ""
     private var lastSearchText = ""
     
-    let networkManager: NetworkManager
+    private let networkManager: NetworkManager
     
     private var cancellable: AnyCancellable?
     
@@ -41,7 +41,7 @@ final class PlayersViewModel: ObservableObject {
         self.networkManager = networkManager
     }
     
-    private func searching() -> Bool {
+    func isSearchingActive() -> Bool {
         return !searchText.isEmpty
     }
     
@@ -53,7 +53,8 @@ final class PlayersViewModel: ObservableObject {
             self.isPlayersLoaded = false
             self.isSearchingPlayersAllLoaded = false
         }
-        if searching() && !isSearchingPlayersAllLoaded {
+        // MARK: Player Search Loading
+        if isSearchingActive() && !isSearchingPlayersAllLoaded {
             state = .loading
             cancellable = networkManager.getPlayers(perPage: perPage, cursor: searchCursor, searchText: searchText)
                 .receive(on: DispatchQueue.main)
@@ -61,7 +62,7 @@ final class PlayersViewModel: ObservableObject {
                     switch completion {
                     case .failure(let error):
                         print(error)
-                        self.requestError = error
+                        self.requestError = .networkError(error: error)
                         self.state = .failed
                     case .finished:
                         print("finished")
@@ -81,8 +82,8 @@ final class PlayersViewModel: ObservableObject {
                     }
                 }
         }
-        
-        if !searching() && !isPlayersLoaded {
+        // MARK: Players Loading
+        if !isSearchingActive() && !isPlayersLoaded {
             self.isAllLoaded = false
             state = .loading
             cancellable = networkManager.getPlayers(perPage: perPage, cursor: cursor, searchText: searchText)
@@ -91,7 +92,7 @@ final class PlayersViewModel: ObservableObject {
                     switch completion {
                     case .failure(let error):
                         print(error)
-                        self.requestError = error
+                        self.requestError = .networkError(error: error)
                         self.state = .failed
                     case .finished:
                         print("finished")
@@ -113,6 +114,33 @@ final class PlayersViewModel: ObservableObject {
                         self.isAllLoaded = true
                     }
                 }
+        }
+    }
+}
+
+enum NBAPLoadingError: LocalizedError, Equatable {
+    
+    static func == (lhs: NBAPLoadingError, rhs: NBAPLoadingError) -> Bool {
+        return lhs.errorDescription == rhs.errorDescription
+    }
+    
+    
+    case networkError(error: Error?)
+    case noDataResponse
+    
+    var errorDescription: String? {
+        switch self {
+        case .networkError:
+            return "There seems to be problem with network connection. Try again later."
+        case .noDataResponse:
+            return "Server returned no data."
+        }
+    }
+    
+    var failureReason: String? {
+        switch self {
+        case .networkError, .noDataResponse:
+            return "Could not load Players"
         }
     }
 }

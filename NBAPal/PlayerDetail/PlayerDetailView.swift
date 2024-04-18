@@ -25,11 +25,16 @@ struct PlayerDetailView: View {
                             Text(viewModel.player.firstName ?? "N/A")
                                 .font(.largeTitle)
                                 .bold()
+                                .lineLimit(2)
+                            Spacer()
+                        }.padding(.horizontal)
+                        HStack {
                             Text(viewModel.player.lastName ?? "N/A")
                                 .font(.largeTitle)
                                 .bold()
+                                .lineLimit(2)
                             Spacer()
-                        }.padding(5)
+                        }.padding(.horizontal)
                     }
                     VStack {
                         Text("Personal")
