@@ -81,7 +81,7 @@ struct PlayersView: View {
                             Text("Press GO to search")
                         })
                 }
-                if viewModel.requestError != nil {
+                if viewModel.requestError != nil && (viewModel.players.isEmpty || viewModel.searchedPlayers.isEmpty){
                     ContentUnavailableView(
                         label: {
                             Label("No network", systemImage: "network.slash")
