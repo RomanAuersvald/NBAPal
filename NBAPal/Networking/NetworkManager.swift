@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import OSLog
 
 enum RequestError: Error {
     case badRequest
@@ -19,6 +20,7 @@ class NetworkManager: NSObject {
     
     private var cursor = 0
     private var isPlayersComplete = false
+    private let decoder = JSONDecoder()
     
     func getPlayers(perPage: Int, cursor: Int?, searchText: String) -> AnyPublisher<Wrap, Error> {
         var urlComponents = URLComponents(string: "https://api.balldontlie.io/v1/players")!
@@ -38,7 +40,6 @@ class NetworkManager: NSObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "GET"
         
-        let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         return URLSession.shared.dataTaskPublisher(for: request)

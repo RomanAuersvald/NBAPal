@@ -14,7 +14,6 @@ class AppCoordinator: Coordinator {
     let window: UIWindow
     
     var childCoordinators = [Coordinator]()
-    var subscriptions = Set<AnyCancellable>()
     
     init(window: UIWindow) {
         self.window = window

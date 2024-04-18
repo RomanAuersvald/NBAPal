@@ -7,29 +7,22 @@
 
 import Foundation
 import Combine
+import OSLog
 
 @Observable
 final class PlayersViewModel {
     
-    enum PlayersVMLoadingState: Equatable {
-        case idle
-        case loading
-        case finished
-        case failed
-    }
-    
-     var players: [Player] = []
-     var searchedPlayers: [Player] = []
-     var requestError: NBAPLoadingError?
-     var state: PlayersVMLoadingState = .idle
+    var players: [Player] = []
+    var searchedPlayers: [Player] = []
+    var requestError: NBAPLoadingError?
     private let perPage = 35
     private var cursor = 0
     private var searchCursor: Int? = nil // default for search is none
     private var isSearchingPlayersAllLoaded: Bool = false
     private var isPlayersLoaded: Bool = false
     
-     var isAllLoaded: Bool = false
-     var searchText = ""
+    var isAllLoaded: Bool = false
+    var searchText = ""
     private var lastSearchText = ""
     
     private let networkManager: NetworkManager
@@ -55,63 +48,63 @@ final class PlayersViewModel {
         }
         // MARK: Player Search Loading
         if isSearchingActive() && !isSearchingPlayersAllLoaded {
-            state = .loading
+            Logger.networking.log("Search request for \(self.searchText) initiated")
             cancellable = networkManager.getPlayers(perPage: perPage, cursor: searchCursor, searchText: searchText)
                 .receive(on: DispatchQueue.main)
                 .sink { completion in
                     switch completion {
                     case .failure(let error):
-                        print(error)
                         self.requestError = .networkError(error: error)
-                        self.state = .failed
+                        Logger.networking.error("Search request error \(error)")
                     case .finished:
-                        print("finished")
+                        Logger.networking.info("Search request for \(self.searchText) finished")
                     }
                 } receiveValue: { [unowned self] receivedDataWrapper in
-                    guard let receivedPlayers = receivedDataWrapper.data else { self.state = .idle; return }
-                    
+                    guard let receivedPlayers = receivedDataWrapper.data else { return }
+                    Logger.networking.log("Search fetched \(receivedPlayers.count) players")
                     self.searchedPlayers.append(contentsOf: receivedPlayers)
                     if let nextCursor = receivedDataWrapper.meta?.nextCursor {
                         self.searchCursor = nextCursor
+                        Logger.networking.log("Search next cursor set for \(nextCursor)")
                     }
-                    self.state = .finished
                     
                     if receivedPlayers.count < self.perPage {
                         self.isSearchingPlayersAllLoaded = true
                         self.isAllLoaded = true
+                        Logger.networking.log("Search loaded all results")
                     }
                 }
         }
         // MARK: Players Loading
         if !isSearchingActive() && !isPlayersLoaded {
+            Logger.networking.log("Players request initiated")
             self.isAllLoaded = false
-            state = .loading
             cancellable = networkManager.getPlayers(perPage: perPage, cursor: cursor, searchText: searchText)
                 .receive(on: DispatchQueue.main)
                 .sink { completion in
                     switch completion {
                     case .failure(let error):
-                        print(error)
                         self.requestError = .networkError(error: error)
-                        self.state = .failed
+                        Logger.networking.error("Players request error: \(error)")
                     case .finished:
-                        print("finished")
+                        Logger.networking.info("Players request finished")
                     }
                     
                 } receiveValue: { [unowned self] receivedDataWrapper in
-                    guard let receivedPlayers = receivedDataWrapper.data else { self.state = .idle; return }
-                    
+                    guard let receivedPlayers = receivedDataWrapper.data else {  return }
+                    Logger.networking.log("Players request fetched \(receivedPlayers.count) players")
                     self.players.append(contentsOf: receivedPlayers)
                     if let nextCursor = receivedDataWrapper.meta?.nextCursor {
                         self.cursor = nextCursor
+                        Logger.networking.log("Players next cursor set for \(nextCursor)")
                     }else {
                         self.cursor += self.perPage // failback - should not happen
                     }
-                    self.state = .finished
                     
                     if receivedPlayers.count < self.perPage {
                         self.isPlayersLoaded = true
                         self.isAllLoaded = true
+                        Logger.networking.log("Players request loaded all players")
                     }
                 }
         }
@@ -123,7 +116,6 @@ enum NBAPLoadingError: LocalizedError, Equatable {
     static func == (lhs: NBAPLoadingError, rhs: NBAPLoadingError) -> Bool {
         return lhs.errorDescription == rhs.errorDescription
     }
-    
     
     case networkError(error: Error?)
     case noDataResponse

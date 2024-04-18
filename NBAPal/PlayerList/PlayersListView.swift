@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import OSLog
 
 struct PlayersView: View {
     
@@ -20,6 +21,7 @@ struct PlayersView: View {
             List {
                 ForEach (!viewModel.isSearchingActive() ? viewModel.players : viewModel.searchedPlayers, id: \.id) { player in
                     Button(action: {
+//                        Logger.userInteraction.log("Clicked \(player.fullName)")
                         didClickPlayer.send(player)
                     }, label: {
                         PlayerListRow(player: player)
@@ -47,6 +49,7 @@ struct PlayersView: View {
             }
             .onAppear(perform: {
                 if isFirstAppear {
+                    Logger.userInteraction.log("First appearance of PlayersListView, loading first batch.")
                     loadNextDataBatch()
                     isFirstAppear = false
                 }
@@ -85,14 +88,6 @@ struct PlayersView: View {
             .onChange(of: viewModel.requestError, {
                 errorOccurred.send(viewModel.requestError!)
             })
-            .alert(isPresented: Binding<Bool>(
-                get: { self.viewModel.state == .failed },
-                set: { _ in self.viewModel.state = .idle }
-            )) {
-                Alert(title: Text("Error occured"),
-                      message: Text(""),
-                      dismissButton: .default(Text("OK")))
-            }
         }
     }
     

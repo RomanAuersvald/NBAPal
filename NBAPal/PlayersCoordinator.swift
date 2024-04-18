@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import OSLog
 
 class PlayersCoordinator: Coordinator {
     
@@ -20,6 +21,7 @@ class PlayersCoordinator: Coordinator {
         rootViewController = UINavigationController()
         rootViewController.navigationBar.prefersLargeTitles = true
         sharedViewModel = PlayersViewModel(networkManager: NetworkManager.shared)
+        Logger.navigation.log("Player coordinator initialized")
     }
     
     func start() {
@@ -27,6 +29,7 @@ class PlayersCoordinator: Coordinator {
         bind(view: view)
         let navigationViewController = UINavigationController(rootViewController: UIHostingController(rootView: view))
         rootViewController = navigationViewController
+        Logger.navigation.log("Player coordinator started")
     }
     
     // MARK: View Bindings
@@ -46,6 +49,7 @@ class PlayersCoordinator: Coordinator {
                 self?.showErrorAlert(with: localizedError)
             })
             .store(in: &cancellables)
+        Logger.navigation.log("Binded PlayersListView actions")
     }
     
     private func bind(view: PlayerDetailView) {
@@ -57,6 +61,7 @@ class PlayersCoordinator: Coordinator {
                 }
             })
             .store(in: &cancellables)
+        Logger.navigation.log("Binded PlayerDetailView actions")
     }
     
 }
@@ -64,13 +69,15 @@ class PlayersCoordinator: Coordinator {
 // MARK: Navigation Related Extension
 extension PlayersCoordinator {
     
-    private func showErrorAlert(with error: LocalizedError){ //LocalizedError
+    private func showErrorAlert(with error: LocalizedError){
+        Logger.navigation.warning("Showing error alert")
         let alertController = UIAlertController(title: error.failureReason, message: error.errorDescription, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { _ in }))
         rootViewController.topViewController?.present(alertController, animated: true)
     }
     
     @MainActor private func showPlayerDetail(for player: Player) {
+        Logger.navigation.log("Navigating to PlayerDetailView")
         let viewModel = PlayerDetailViewModel(player: player)
         let playerDetailView = PlayerDetailView(viewModel: viewModel)
         bind(view: playerDetailView)
@@ -78,6 +85,7 @@ extension PlayersCoordinator {
     }
     
     @MainActor private func showTeamView(for team: Team) {
+        Logger.navigation.log("Navigating to TeamView")
         let viewModel = TeamViewModel(team: team)
         let clubView = TeamView(viewModel: viewModel)
         rootViewController.pushViewController(UIHostingController(rootView: clubView), animated: true)
