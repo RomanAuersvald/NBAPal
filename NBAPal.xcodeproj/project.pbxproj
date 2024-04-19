@@ -94,6 +94,7 @@
 		30223F5A2BCD66A600AB156D /* NBAPal */ = {
 			isa = PBXGroup;
 			children = (
+				30223F692BCD66A900AB156D /* Info.plist */,
 				30223FA52BD2765000AB156D /* SupportFiles */,
 				30223F912BCE892000AB156D /* MockData.swift */,
 				30223FA02BD1B1F300AB156D /* Coordinators */,
@@ -197,7 +198,6 @@
 				30223F5B2BCD66A600AB156D /* AppDelegate.swift */,
 				30223F5D2BCD66A600AB156D /* SceneDelegate.swift */,
 				30223F662BCD66A800AB156D /* LaunchScreen.storyboard */,
-				30223F692BCD66A900AB156D /* Info.plist */,
 				30223F642BCD66A800AB156D /* Assets.xcassets */,
 				30223FA22BD1B41500AB156D /* Localizable.xcstrings */,
 			);
