@@ -17,6 +17,13 @@ class NBAPalNetworkManager: NetworkManager {
     private var isPlayersComplete = false
     private let decoder = JSONDecoder()
     
+    /**
+    func getPlayers(perPage: Int, cursor: Int?, searchText: String) -> AnyPublisher<Wrap, Error>
+     - parameter perPage: number of results per query
+     - parameter cursor: optional pointer to next player ID, use nil for searching
+     - parameter searchText: send empty String for default, else send search text
+     - returns: Wrap with players array and Meta with information about next cursor and perPage, alternatively returns request error
+    */
     func getPlayers(perPage: Int, cursor: Int?, searchText: String) -> AnyPublisher<Wrap, Error> {
         var urlComponents = URLComponents(string: configuration.backeddURL)!
         urlComponents.queryItems = [

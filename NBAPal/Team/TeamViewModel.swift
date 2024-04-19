@@ -15,6 +15,7 @@ final class TeamViewModel: ObservableObject {
     var team: Team
     let teamImages = ["person.3.sequence.fill", "person.2.circle.fill", "figure.2"]
     
+    // present if it is possible to geocode team's city
     @Published var hometownLocation: CLLocationCoordinate2D?
     @Published var hometownRegion: MKCoordinateRegion?
     
@@ -36,12 +37,12 @@ final class TeamViewModel: ObservableObject {
                 Logger.userInteraction.warning("Failed to reverse geocode \(teamCity)")
                 return
             }
-               
-               let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-               let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-               self.hometownLocation = center
-               self.hometownRegion = region
-           }
-       }
+            
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+            self.hometownLocation = center
+            self.hometownRegion = region
+        }
+    }
 }
 

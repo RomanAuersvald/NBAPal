@@ -124,7 +124,7 @@ struct PlayerDetailHeader: View {
     
     var body: some View {
         ZStack {
-            PageGallery(images: playerImages)
+            PageGalleryView(images: playerImages)
                 .frame(minHeight: 220)
             VStack(alignment: .trailing) {
                 HStack {
@@ -149,6 +149,6 @@ struct PlayerDetailHeader: View {
 
 #Preview {
     PlayerDetailView(viewModel: PlayerDetailViewModel(player: MockData.shared.player))
-        .environment(\.locale, .init(identifier: "cs"))
+        
 }
 

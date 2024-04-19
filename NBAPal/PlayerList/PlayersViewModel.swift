@@ -15,18 +15,17 @@ final class PlayersViewModel {
     var players: [Player] = []
     var searchedPlayers: [Player] = []
     var requestError: NBAPLoadingError?
-    private let perPage: Int
-    private var cursor = 0
-    private var searchCursor: Int? = nil // default for search is none
-    private var isSearchingPlayersAllLoaded: Bool = false
-    private var isPlayersLoaded: Bool = false
-    
     var isAllLoaded: Bool = false
     var searchText = ""
+    
+    private let perPage: Int                // number of results per query page
+    private var cursor = 0                  // cursor for next result
+    private var searchCursor: Int? = nil    // default for search is none
+    private var isSearchingPlayersAllLoaded: Bool = false
+    private var isPlayersLoaded: Bool = false
     private var lastSearchText = ""
     
     private let networkManager: NetworkManager
-    
     private var cancellable: AnyCancellable?
     
     

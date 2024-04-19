@@ -56,12 +56,12 @@ struct PlayersView: View {
                 }
             })
             .navigationTitle(LocalizedStringKey("Players"))
-//            .toolbar{
-//                ToolbarItem(placement: .topBarLeading) {
-//                    Image(systemName: "basketball.fill")
-//                        .tint(.orange)
-//                }
-//            }
+            .toolbar{
+                ToolbarItem(placement: .navigation) {
+                    Image(systemName: "basketball.fill")
+                        .tint(.orange)
+                }
+            }
             .overlay {
                 if viewModel.players.isEmpty && viewModel.requestError == nil {
                     ContentUnavailableView(
@@ -113,4 +113,6 @@ struct PlayersView: View {
 
 #Preview {
     PlayersView(viewModel: PlayersViewModel(networkManager: NBAPalNetworkManager.shared))
+        .environment(\.locale, .init(identifier: "en"))
+//        .environment(\.locale, .init(identifier: "cs"))
 }

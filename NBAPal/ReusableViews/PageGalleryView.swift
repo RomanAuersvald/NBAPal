@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PageGallery: View {
+struct PageGalleryView: View {
     
     let images: [String]
     
@@ -26,5 +26,5 @@ struct PageGallery: View {
 }
 
 #Preview {
-    PageGallery(images: ["person.3.sequence.fill", "person.2.circle.fill", "figure.2"])
+    PageGalleryView(images: ["person.3.sequence.fill", "person.2.circle.fill", "figure.2"])
 }

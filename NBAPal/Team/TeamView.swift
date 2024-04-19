@@ -15,10 +15,12 @@ struct TeamView: View {
     
     var body: some View {
         ScrollView {
+            // MARK: Team Header
             TeamHeader(team: viewModel.team, teamImages: viewModel.teamImages)
             
             ZStack {
                 VStack {
+                    // MARK: Team Full Name
                     VStack {
                         Spacer()
                         HStack {
@@ -29,6 +31,7 @@ struct TeamView: View {
                         }.padding(.horizontal)
                         Spacer(minLength: 20)
                     }
+                    // MARK: Team info
                     VStack {
                         Text(LocalizedStringKey("Info"))
                             .textCase(.uppercase)
@@ -56,6 +59,7 @@ struct TeamView: View {
                     }
                     Divider()
                     Spacer(minLength: 20)
+                    // MARK: Team HomeTown map view
                     if let location = viewModel.hometownLocation, let region = viewModel.hometownRegion {
                         Text(LocalizedStringKey("HomeTown"))
                             .textCase(.uppercase)
@@ -91,7 +95,7 @@ struct TeamHeader: View {
     
     var body: some View {
         ZStack {
-            PageGallery(images: teamImages)
+            PageGalleryView(images: teamImages)
                 .frame(minHeight: 220)
             VStack(alignment: .trailing) {
                 HStack {
